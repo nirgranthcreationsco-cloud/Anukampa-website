@@ -42,6 +42,18 @@ const server = http.createServer((request, response) => {
   });
 });
 
-server.listen(port, () => {
-  console.log(`Anukampa website running at http://localhost:${port}`);
+let currentPort = Number(process.env.PORT || 5174);
+
+server.on("error", (err) => {
+  if (err.code === "EADDRINUSE") {
+    currentPort++;
+    server.listen(currentPort);
+  } else {
+    console.error(err);
+  }
 });
+
+server.listen(currentPort, () => {
+  console.log(`Anukampa website running at http://localhost:${currentPort}`);
+});
+
