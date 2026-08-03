@@ -31,12 +31,14 @@
         <button class="nav-toggle" type="button" aria-label="मेन्यू खोलें">
           <span></span><span></span><span></span>
         </button>
+        <button class="nav-close-btn" type="button" aria-label="मेन्यू बंद करें">✕</button>
         <div class="nav-links">
           <a href="#about">क्या है?</a>
           <a href="#work">कार्य क्षेत्र</a>
           <a href="#membership">सदस्यता</a>
+          <a href="#volunteer">प्रतिनिधि बनें</a>
           <a href="#donate">दान विवरण</a>
-          <a href="#contact">संपर्क</a>
+          <a class="nav-links-donate-btn" href="#donate">अभी सहयोग करें</a>
         </div>
       </nav>
     </header>
@@ -62,6 +64,7 @@
         </div>
         <div class="shell hero-grid">
           <div class="hero-copy">
+            <span class="hero-pill-badge">समर्पण सहयोग फाउंडेशन का प्रकल्प</span>
             <p class="eyebrow">समर्पण सहयोग फाउंडेशन का एक प्रकल्प</p>
             <h1>
               जरूरतमंद जीवनों में
@@ -142,18 +145,15 @@
               सेवा भावना और समाज के प्रति समर्पण इस प्रकल्प का प्रेरणा स्रोत है।
             </p>
           </div>
-          <div class="quote-card">
-            <span class="quote-mark">“</span>
-            <h3>सेवा ही धर्म है, सहयोग ही शक्ति है!</h3>
-            <p>
-              आइए, हम सब मिलकर “अनुकम्पा” परिवार का हिस्सा बनें और जरूरतमंद
-              समाजजनों के जीवन में नई उम्मीद जगाएं।
-            </p>
+          <div class="image-collage">
+            <img src="assets/happy_kids.png" alt="Happy children representing education" />
+            <img src="assets/hands_care.png" alt="Caring hands representing medical donation" />
           </div>
         </div>
       </section>
 
       <section class="section values" id="work">
+        <div class="bg-watermark" style="background-image: url('assets/happy_kids.png');"></div>
         <div class="shell">
           <div class="section-head">
             <p class="eyebrow">हमारे मुख्य कार्य क्षेत्र</p>
@@ -253,6 +253,7 @@
       </section>
 
       <section class="section membership" id="membership">
+        <div class="bg-watermark" style="background-image: url('assets/hands_care.png');"></div>
         <div class="shell">
           <div class="section-head">
             <p class="eyebrow">सदस्यता पत्र</p>
@@ -359,12 +360,8 @@
               <span class="secure-badge">🛡️ Secure Payment Gateway</span>
               <h3>सुरक्षित ऑनलाइन भुगतान</h3>
             </div>
-            
-            <div class="payment-tabs">
-              <button class="tab-btn active" data-freq="monthly">मासिक सहयोग</button>
-              <button class="tab-btn" data-freq="onetime">एकमुश्त सहयोग</button>
-            </div>
-            
+
+
             <div class="quick-amounts">
               <button class="amount-btn active" data-value="1000">₹1,000</button>
               <button class="amount-btn" data-value="5000">₹5,000</button>
@@ -393,43 +390,50 @@
         </div>
       </section>
 
-      <section class="section join" id="contact">
+      <section class="section join" id="volunteer">
         <div class="shell join-grid">
           <div>
-            <p class="eyebrow">संपर्क करें</p>
-            <h2>सदस्यता या सहयोग के लिए हमसे जुड़ें</h2>
+            <p class="eyebrow">अनुकम्पा प्रतिनिधि</p>
+            <h2>अभियान में हमारा साथ दें</h2>
             <p>
-              अधिक जानकारी हेतु दिए गए नंबर पर संपर्क करें। आप WhatsApp संदेश के
-              माध्यम से भी सदस्यता की रुचि भेज सकते हैं।
+              क्या आप समाज की भलाई और सेवा कार्यों में रुचि रखते हैं? अनुकम्पा के आधिकारिक प्रतिनिधि (Representative) बनकर हमारे अभियानों को आगे बढ़ाएं।
             </p>
+            <ul class="volunteer-tasks" style="margin: 18px 0; padding-left: 20px; color: #4A4A6A; line-height: 1.7; font-size: 0.95rem;">
+              <li style="margin-bottom: 10px;"><strong>अपने शहर का प्रतिनिधित्व करें:</strong> अपने शहर या क्षेत्र में अनुकम्पा प्रकल्प के मुख्य प्रतिनिधि (Representative) के रूप में काम करें।</li>
+              <li style="margin-bottom: 10px;"><strong>स्थानीय स्तर पर सहायता:</strong> अपने क्षेत्र में जरूरतमंद लोगों व परिवारों की पहचान करने और उन तक मदद पहुँचाने में नेतृत्व करें।</li>
+              <li style="margin-bottom: 10px;"><strong>जागरूकता अभियान:</strong> सोशल मीडिया और व्यक्तिगत संपर्कों के माध्यम से प्रकल्प के परोपकारी अभियानों का प्रचार करें।</li>
+            </ul>
             <div class="contact-actions">
-              <a class="phone" href="tel:+918817132580">88171 32580</a>
-              <a class="phone" href="tel:+918839481571">88394 81571</a>
+              <a class="phone" href="tel:+918817132580">88171 32580 (Volunteer Help)</a>
             </div>
           </div>
-          <form class="interest-form" id="interestForm">
+          <form class="interest-form" id="volunteerForm">
             <label>
-              आपका नाम
+              आपका पूरा नाम
               <input name="name" type="text" placeholder="नाम लिखें" required />
             </label>
             <label>
               मोबाइल नंबर
-              <input name="phone" type="tel" placeholder="मोबाइल नंबर" required />
+              <input name="phone" type="tel" minlength="10" maxlength="10" pattern="[0-9]{10}" inputmode="numeric" placeholder="10 अंकों का मोबाइल नंबर" title="कृपया 10 अंकों का मोबाइल नंबर दर्ज करें" required />
             </label>
             <label>
-              सहयोग रुचि
-              <select name="tier">
-                <option>सदस्य - ₹ 11,000/-</option>
-                <option>संरक्षक - ₹ 1,11,000/-</option>
-                <option>परम संरक्षक - ₹ 2,51,000/-</option>
-                <option>शिरोमणि संरक्षक - ₹ 5,51,000/-</option>
-                <option>मासिक सहयोग - ₹ 1,000/-</option>
+              शहर / क्षेत्र
+              <input name="city" type="text" placeholder="अपने शहर का नाम" required />
+            </label>
+            <label>
+              योगदान का तरीका
+              <select name="role">
+                <option>सोशल मीडिया प्रचार</option>
+                <option>स्थानीय जागरूकता</option>
+                <option>इवेंट / कार्यक्रम सहयोग</option>
+                <option>अन्य</option>
               </select>
             </label>
-            <button class="btn primary" type="submit">WhatsApp पर भेजें</button>
+            <button class="btn primary" type="submit">प्रतिनिधि के रूप में जुड़ें</button>
           </form>
         </div>
       </section>
+
 
       <section class="section brochures">
         <div class="shell">

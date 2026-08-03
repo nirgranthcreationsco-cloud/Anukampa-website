@@ -4,7 +4,6 @@ const modal = document.querySelector("#donateModal");
 const openDonateButtons = document.querySelectorAll("[data-open-donate]");
 const closeModalButtons = document.querySelectorAll("[data-close-modal]");
 const copyButtons = document.querySelectorAll(".copy-btn");
-const interestForm = document.querySelector("#interestForm");
 const header = document.querySelector(".site-header");
 const hero = document.querySelector(".hero");
 const heroCard = document.querySelector(".hero-card");
@@ -12,6 +11,12 @@ const progressBar = document.querySelector(".scroll-progress");
 
 navToggle?.addEventListener("click", () => {
   document.body.classList.toggle("nav-open");
+});
+
+// Close button inside overlay
+const navCloseBtn = document.querySelector(".nav-close-btn");
+navCloseBtn?.addEventListener("click", () => {
+  document.body.classList.remove("nav-open");
 });
 
 navLinks.forEach((link) => {
@@ -97,7 +102,7 @@ revealTargets.forEach((element) => revealObserver.observe(element));
 function openModal() {
   modal?.classList.add("is-open");
   modal?.setAttribute("aria-hidden", "false");
-  
+
   // Reset payment gateway modal state on open
   document.getElementById("gatewayStepSelect").style.display = "block";
   document.getElementById("gatewayStepProcessing").style.display = "none";
@@ -143,6 +148,21 @@ amountButtons.forEach(btn => {
 });
 
 if (customAmountInput) {
+  customAmountInput.addEventListener("keypress", (e) => {
+    // Block non-numeric characters (like + - . e)
+    if (e.key < "0" || e.key > "9") {
+      e.preventDefault();
+    }
+  });
+
+  customAmountInput.addEventListener("paste", (e) => {
+    // Block pasting anything that contains non-numbers
+    const data = e.clipboardData.getData("text");
+    if (!/^\d+$/.test(data)) {
+      e.preventDefault();
+    }
+  });
+
   customAmountInput.addEventListener("input", () => {
     // remove active state from pre-selected buttons if the amount is custom
     amountButtons.forEach(b => {
@@ -163,12 +183,12 @@ methodOptions.forEach(opt => {
   opt.addEventListener("click", () => {
     methodOptions.forEach(o => o.classList.remove("active"));
     opt.classList.add("active");
-    
+
     const targetMethod = opt.dataset.method;
     methodDetails.forEach(det => {
       det.classList.remove("active");
     });
-    
+
     if (targetMethod === "upi") document.getElementById("detailsUpi").classList.add("active");
     if (targetMethod === "card") document.getElementById("detailsCard").classList.add("active");
     if (targetMethod === "netbanking") document.getElementById("detailsNetbanking").classList.add("active");
@@ -189,18 +209,18 @@ const payButtons = document.querySelectorAll(".gateway-pay-btn");
 payButtons.forEach(btn => {
   btn.addEventListener("click", () => {
     const amount = customAmountInput ? customAmountInput.value : "1,000";
-    
+
     document.getElementById("gatewayStepSelect").style.display = "none";
     document.getElementById("gatewayStepProcessing").style.display = "block";
-    
+
     // Simulate API request processing
     setTimeout(() => {
       document.getElementById("gatewayStepProcessing").style.display = "none";
       document.getElementById("gatewayStepSuccess").style.display = "block";
-      
+
       const receiptAmount = document.getElementById("receiptAmount");
       const receiptTxnId = document.getElementById("receiptTxnId");
-      
+
       if (receiptAmount) {
         receiptAmount.textContent = `₹${Number(amount).toLocaleString("en-IN")}`;
       }
@@ -229,12 +249,95 @@ copyButtons.forEach((button) => {
   });
 });
 
-interestForm?.addEventListener("submit", (event) => {
+// Configuration: Paste your Google Apps Script Web App URL here to save submissions to Google Sheets.
+// If left empty, it will default to sending the details directly via WhatsApp.
+const GOOGLE_SHEET_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbxa3uDckuFOJIuRucX44tz1dMCtJMjaZ74Y6Io1ewGVpoqX7ZD3Q5kDCKZyKf1-g40A/exec";
+
+const volunteerForm = document.querySelector("#volunteerForm");
+
+volunteerForm?.addEventListener("submit", async (event) => {
   event.preventDefault();
-  const formData = new FormData(interestForm);
+  const formData = new FormData(volunteerForm);
   const name = formData.get("name");
   const phone = formData.get("phone");
-  const tier = formData.get("tier");
-  const message = `जय जिनेन्द्र, मैं अनुकम्पा से जुड़ना चाहता/चाहती हूँ.%0Aनाम: ${name}%0Aमोबाइल: ${phone}%0Aरुचि: ${tier}`;
-  window.open(`https://wa.me/918817132580?text=${message}`, "_blank", "noopener,noreferrer");
+  const city = formData.get("city");
+  const role = formData.get("role");
+
+  const whatsappMessage = `जय जिनेन्द्र, मैं अनुकम्पा प्रतिनिधि बनकर अभियान में सहयोग देना चाहता/चाहती हूँ।%0Aनाम: ${name}%0Aमोबाइल: ${phone}%0Aशहर: ${city}%0Aयोगदान: ${role}`;
+
+  // If webhook URL is set, attempt to save to Google Sheets first
+  if (GOOGLE_SHEET_WEBHOOK_URL) {
+    const submitBtn = volunteerForm.querySelector("button[type='submit']");
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = "दर्ज किया जा रहा है...";
+    submitBtn.disabled = true;
+
+    try {
+      const response = await fetch(GOOGLE_SHEET_WEBHOOK_URL, {
+        method: "POST",
+        mode: "no-cors", // Required for Google Apps Script redirects
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, phone, city, role, date: new Date().toLocaleString("en-IN") }),
+      });
+
+      alert("सफलतापूर्वक दर्ज कर लिया गया है! हमारे प्रतिनिधि जल्द ही आपसे संपर्क करेंगे।");
+      volunteerForm.reset();
+    } catch (error) {
+      console.error("Submission failed, falling back to WhatsApp", error);
+      // Fallback to WhatsApp on error
+      window.open(`https://wa.me/918817132580?text=${whatsappMessage}`, "_blank", "noopener,noreferrer");
+    } finally {
+      submitBtn.textContent = originalText;
+      submitBtn.disabled = false;
+    }
+  } else {
+    // If webhook is not configured yet, default to direct WhatsApp redirect
+    window.open(`https://wa.me/918817132580?text=${whatsappMessage}`, "_blank", "noopener,noreferrer");
+  }
 });
+
+// Deep-linking / Routing for QR codes
+function handleHashRoute() {
+  const hash = window.location.hash;
+  if (hash) {
+    const targetElement = document.querySelector(hash);
+    if (targetElement) {
+      setTimeout(() => {
+        targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
+        // Ensure reveal animations trigger immediately for scanned deep-links
+        targetElement.classList.add("is-visible");
+        targetElement.querySelectorAll(".reveal").forEach(el => el.classList.add("is-visible"));
+      }, 150);
+    }
+  }
+}
+
+window.addEventListener("load", handleHashRoute);
+window.addEventListener("hashchange", handleHashRoute);
+
+// Phone input validation (Volunteer form)
+const volunteerPhoneInput = document.querySelector("#volunteerForm input[name='phone']");
+if (volunteerPhoneInput) {
+  volunteerPhoneInput.addEventListener("keypress", (e) => {
+    // Block non-numeric characters
+    if (e.key < "0" || e.key > "9") {
+      e.preventDefault();
+    }
+  });
+
+  volunteerPhoneInput.addEventListener("input", () => {
+    // Keep only numbers and restrict to 10 digits
+    volunteerPhoneInput.value = volunteerPhoneInput.value.replace(/\D/g, "").slice(0, 10);
+  });
+
+  volunteerPhoneInput.addEventListener("paste", (e) => {
+    const data = e.clipboardData.getData("text");
+    if (!/^\d+$/.test(data)) {
+      e.preventDefault();
+    }
+  });
+}
+
+
