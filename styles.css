@@ -16,6 +16,7 @@
 
 * {
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
 }
 
 html {
@@ -196,7 +197,9 @@ h2 {
   color: var(--maroon-dark);
   font-family: "Noto Serif Devanagari", "Kohinoor Devanagari", "Mangal", Georgia, serif;
   letter-spacing: -0.01em;
-  line-height: 1.2;
+  line-height: 1.45;
+  padding-top: 2px;
+  padding-bottom: 2px;
 }
 
 .hero-copy h1 {
@@ -592,43 +595,78 @@ p {
   margin-bottom: 16px;
 }
 
+.account-card-wrapper {
+  max-width: 760px;
+  margin: 36px auto 0 auto;
+}
+
 .account-card {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 12px;
-  margin-top: 28px;
-  padding: 22px;
-  border-radius: 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 32px;
+  border-radius: 28px;
   background: linear-gradient(135deg, var(--maroon-dark), var(--maroon));
-  box-shadow: var(--shadow);
+  box-shadow: 0 20px 50px rgba(139, 19, 14, 0.22);
 }
 
-.account-card div {
-  padding: 14px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+.account-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 18px;
 }
 
-.account-card small {
+.account-info small {
   display: block;
   color: var(--gold);
-  font-weight: 900;
+  font-weight: 700;
+  font-size: 0.85rem;
+  margin-bottom: 4px;
 }
 
-.account-card strong {
+.account-info strong {
   display: block;
-  color: #fff7e6;
-  font-size: 1.08rem;
+  color: #ffffff;
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
 }
 
 .copy-btn {
-  align-self: center;
-  padding: 9px 12px;
+  padding: 10px 18px;
   border: 0;
   border-radius: 999px;
-  color: var(--maroon);
+  color: var(--maroon-dark);
   background: #fff3d7;
   cursor: pointer;
-  font-weight: 900;
+  font-weight: 700;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.copy-btn:hover {
+  background: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.tax-benefit-badge {
+  margin-top: 20px;
+  padding: 16px 24px;
+  background: rgba(23, 79, 42, 0.08);
+  border: 1px solid rgba(23, 79, 42, 0.2);
+  border-radius: 18px;
+  text-align: center;
+  color: #174f2a;
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.6;
 }
 
 .checkout-card {
@@ -1104,8 +1142,9 @@ p {
 
 .brochure-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  grid-template-columns: repeat(2, minmax(0, 440px));
+  justify-content: center;
+  gap: 28px;
 }
 
 .brochure-grid a {
@@ -2422,15 +2461,19 @@ html {
   h1, h2 {
     font-size: clamp(22px, 6vw, 28px) !important;
     font-weight: 600 !important;
-    line-height: 1.3 !important;
+    line-height: 1.45 !important;
     letter-spacing: 0 !important;
+    padding-top: 2px !important;
+    padding-bottom: 2px !important;
   }
 
   h3 {
     font-size: 17px !important;
     font-weight: 600 !important;
-    line-height: 1.3 !important;
+    line-height: 1.45 !important;
     letter-spacing: 0 !important;
+    padding-top: 1px !important;
+    padding-bottom: 1px !important;
   }
 
   p {
@@ -2477,8 +2520,10 @@ html {
 
   .brand strong {
     font-size: 1.15rem !important;
-    line-height: 1.2 !important;
+    line-height: 1.4 !important;
     color: #8b130e !important;
+    padding: 2px 0 !important;
+    display: inline-block !important;
   }
 
   .brand small {
@@ -2697,14 +2742,19 @@ html {
   .hero-copy h1 {
     font-size: clamp(26px, 7vw, 32px) !important;
     font-weight: 600 !important;
-    line-height: 1.3 !important;
+    line-height: 1.45 !important;
     color: #1A1A2E !important;
     text-align: center !important;
     max-width: 100% !important;
     margin: 0 0 14px 0 !important;
+    padding-top: 2px !important;
+    padding-bottom: 2px !important;
   }
 
   .hero-copy h1 span {
+    display: inline-block !important;
+    padding: 2px 0 6px !important;
+    line-height: 1.45 !important;
     color: transparent !important;
     background: linear-gradient(100deg, #8b130e, #f28a12) !important;
     background-clip: text !important;

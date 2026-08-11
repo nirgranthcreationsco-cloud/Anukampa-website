@@ -1,8 +1,5 @@
 const navToggle = document.querySelector(".nav-toggle");
 const navLinks = document.querySelectorAll(".nav-links a");
-const modal = document.querySelector("#donateModal");
-const openDonateButtons = document.querySelectorAll("[data-open-donate]");
-const closeModalButtons = document.querySelectorAll("[data-close-modal]");
 const copyButtons = document.querySelectorAll(".copy-btn");
 const header = document.querySelector(".site-header");
 const hero = document.querySelector(".hero");
@@ -99,137 +96,7 @@ const revealObserver = new IntersectionObserver(
 
 revealTargets.forEach((element) => revealObserver.observe(element));
 
-function openModal() {
-  modal?.classList.add("is-open");
-  modal?.setAttribute("aria-hidden", "false");
 
-  // Reset payment gateway modal state on open
-  document.getElementById("gatewayStepSelect").style.display = "block";
-  document.getElementById("gatewayStepProcessing").style.display = "none";
-  document.getElementById("gatewayStepSuccess").style.display = "none";
-}
-
-function closeModal() {
-  modal?.classList.remove("is-open");
-  modal?.setAttribute("aria-hidden", "true");
-}
-
-openDonateButtons.forEach((button) => button.addEventListener("click", openModal));
-closeModalButtons.forEach((button) => button.addEventListener("click", closeModal));
-
-document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape") {
-    closeModal();
-  }
-});
-
-// Interactive checkout card controls
-const freqButtons = document.querySelectorAll(".payment-tabs .tab-btn");
-const amountButtons = document.querySelectorAll(".quick-amounts .amount-btn");
-const customAmountInput = document.getElementById("customAmount");
-const startCheckoutBtn = document.getElementById("startCheckoutBtn");
-const gatewayAmountDisplay = document.getElementById("gatewayAmountDisplay");
-
-freqButtons.forEach(btn => {
-  btn.addEventListener("click", () => {
-    freqButtons.forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
-  });
-});
-
-amountButtons.forEach(btn => {
-  btn.addEventListener("click", () => {
-    amountButtons.forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
-    if (customAmountInput) {
-      customAmountInput.value = btn.dataset.value;
-    }
-  });
-});
-
-if (customAmountInput) {
-  customAmountInput.addEventListener("keypress", (e) => {
-    // Block non-numeric characters (like + - . e)
-    if (e.key < "0" || e.key > "9") {
-      e.preventDefault();
-    }
-  });
-
-  customAmountInput.addEventListener("paste", (e) => {
-    // Block pasting anything that contains non-numbers
-    const data = e.clipboardData.getData("text");
-    if (!/^\d+$/.test(data)) {
-      e.preventDefault();
-    }
-  });
-
-  customAmountInput.addEventListener("input", () => {
-    // remove active state from pre-selected buttons if the amount is custom
-    amountButtons.forEach(b => {
-      if (b.dataset.value === customAmountInput.value) {
-        b.classList.add("active");
-      } else {
-        b.classList.remove("active");
-      }
-    });
-  });
-}
-
-// Payment method switcher in gateway modal
-const methodOptions = document.querySelectorAll(".method-option");
-const methodDetails = document.querySelectorAll(".method-details");
-
-methodOptions.forEach(opt => {
-  opt.addEventListener("click", () => {
-    methodOptions.forEach(o => o.classList.remove("active"));
-    opt.classList.add("active");
-
-    const targetMethod = opt.dataset.method;
-    methodDetails.forEach(det => {
-      det.classList.remove("active");
-    });
-
-    if (targetMethod === "upi") document.getElementById("detailsUpi").classList.add("active");
-    if (targetMethod === "card") document.getElementById("detailsCard").classList.add("active");
-    if (targetMethod === "netbanking") document.getElementById("detailsNetbanking").classList.add("active");
-  });
-});
-
-// Trigger checkout simulation
-startCheckoutBtn?.addEventListener("click", () => {
-  const amount = customAmountInput ? customAmountInput.value : "1,000";
-  if (gatewayAmountDisplay) {
-    gatewayAmountDisplay.textContent = `₹${Number(amount).toLocaleString("en-IN")}`;
-  }
-  openModal();
-});
-
-// Simulated transaction flows
-const payButtons = document.querySelectorAll(".gateway-pay-btn");
-payButtons.forEach(btn => {
-  btn.addEventListener("click", () => {
-    const amount = customAmountInput ? customAmountInput.value : "1,000";
-
-    document.getElementById("gatewayStepSelect").style.display = "none";
-    document.getElementById("gatewayStepProcessing").style.display = "block";
-
-    // Simulate API request processing
-    setTimeout(() => {
-      document.getElementById("gatewayStepProcessing").style.display = "none";
-      document.getElementById("gatewayStepSuccess").style.display = "block";
-
-      const receiptAmount = document.getElementById("receiptAmount");
-      const receiptTxnId = document.getElementById("receiptTxnId");
-
-      if (receiptAmount) {
-        receiptAmount.textContent = `₹${Number(amount).toLocaleString("en-IN")}`;
-      }
-      if (receiptTxnId) {
-        receiptTxnId.textContent = `TXN${Math.floor(100000000 + Math.random() * 900000000)}`;
-      }
-    }, 1800);
-  });
-});
 
 copyButtons.forEach((button) => {
   button.addEventListener("click", async () => {
@@ -287,14 +154,14 @@ volunteerForm?.addEventListener("submit", async (event) => {
     } catch (error) {
       console.error("Submission failed, falling back to WhatsApp", error);
       // Fallback to WhatsApp on error
-      window.open(`https://wa.me/918817132580?text=${whatsappMessage}`, "_blank", "noopener,noreferrer");
+      window.open(`https://wa.me/919617273704?text=${whatsappMessage}`, "_blank", "noopener,noreferrer");
     } finally {
       submitBtn.textContent = originalText;
       submitBtn.disabled = false;
     }
   } else {
     // If webhook is not configured yet, default to direct WhatsApp redirect
-    window.open(`https://wa.me/918817132580?text=${whatsappMessage}`, "_blank", "noopener,noreferrer");
+    window.open(`https://wa.me/919617273704?text=${whatsappMessage}`, "_blank", "noopener,noreferrer");
   }
 });
 
