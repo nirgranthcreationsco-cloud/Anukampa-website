@@ -20,6 +20,15 @@ navLinks.forEach((link) => {
   link.addEventListener("click", () => document.body.classList.remove("nav-open"));
 });
 
+// Mobile App Bottom Navigation Active State
+const appNavItems = document.querySelectorAll(".app-nav-item");
+appNavItems.forEach((item) => {
+  item.addEventListener("click", () => {
+    appNavItems.forEach((el) => el.classList.remove("active"));
+    item.classList.add("active");
+  });
+});
+
 function updateScrollProgress() {
   const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
   const progress = scrollableHeight > 0 ? window.scrollY / scrollableHeight : 0;

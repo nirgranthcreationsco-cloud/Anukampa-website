@@ -483,14 +483,26 @@ p {
   padding: 26px 18px;
   border: 1px solid rgba(139, 19, 14, 0.18);
   border-radius: 26px;
-  background: rgba(255, 252, 246, 0.82);
+  background: #ffffff;
   text-align: center;
-  box-shadow: 0 18px 42px rgba(76, 23, 4, 0.09);
+  box-shadow: 0 14px 36px rgba(76, 23, 4, 0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.tier:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 48px rgba(76, 23, 4, 0.14);
 }
 
 .tier.featured {
-  background: linear-gradient(180deg, #fff7df, #fff);
-  border-color: rgba(215, 167, 67, 0.8);
+  background: linear-gradient(135deg, #4b0806, #7a100b);
+  border: 2px solid #f28a12;
+  color: #ffffff;
+  box-shadow: 0 18px 50px rgba(139, 19, 14, 0.35);
+}
+
+.tier.featured h3 {
+  color: #ffffff;
 }
 
 .tier-icon {
@@ -500,34 +512,36 @@ p {
   place-items: center;
   margin: 0 auto 12px;
   border-radius: 50%;
-  background: rgba(139, 19, 14, 0.1);
+  background: rgba(139, 19, 14, 0.08);
   border: 1.5px solid rgba(139, 19, 14, 0.2);
   color: #8b130e;
   font-size: 1.5rem;
 }
 
 .tier.featured .tier-icon {
-  background: rgba(245, 166, 35, 0.15);
-  border: 1.5px solid rgba(245, 166, 35, 0.35);
-  color: #F5A623;
+  background: rgba(242, 138, 18, 0.2);
+  border: 1.5px solid #f28a12;
+  color: #f28a12;
 }
 
 .tier strong {
   display: inline-flex;
-  margin-top: 6px;
-  padding: 8px 14px;
+  margin-top: 8px;
+  padding: 8px 16px;
   border-radius: 999px;
   color: #8b130e;
-  background: #F8F4FF;
-  border: 1px solid rgba(139, 19, 14, 0.2);
+  background: #fff3d7;
+  border: 1px solid rgba(139, 19, 14, 0.25);
   font-size: 1.15rem;
   font-weight: 700;
 }
 
 .tier.featured strong {
-  color: #F5A623;
-  background: #FFF9F0;
-  border: 1px solid rgba(245, 166, 35, 0.3);
+  color: #3d0504;
+  background: linear-gradient(135deg, #f28a12, #ffd166);
+  border: none;
+  font-weight: 800;
+  box-shadow: 0 4px 14px rgba(242, 138, 18, 0.4);
 }
 
 .monthly-note {
@@ -1565,24 +1579,36 @@ h3,
   border-block: 1px solid rgba(139, 19, 14, 0.12);
   background: linear-gradient(90deg, var(--maroon-dark), var(--maroon), #b84a10);
   color: #fff2cc;
+  white-space: nowrap;
+  user-select: none;
 }
 
-.devotion-marquee div {
+.marquee-track {
   display: flex;
   width: max-content;
-  gap: 42px;
-  padding: 13px 0;
+  animation: marquee 28s linear infinite;
+}
+
+.marquee-content {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  padding: 13px 18px 13px 0;
   font-family:
     "Noto Serif Devanagari", "Kohinoor Devanagari", "Mangal", Georgia, serif;
   font-size: 1.15rem;
   font-weight: 900;
   letter-spacing: 0.08em;
-  animation: marquee 22s linear infinite;
 }
 
-.devotion-marquee span::after {
+.marquee-content span {
+  display: inline-flex;
+  align-items: center;
+  gap: 36px;
+}
+
+.marquee-content span::after {
   content: "✦";
-  margin-left: 42px;
   color: var(--gold);
 }
 
@@ -2428,6 +2454,88 @@ html {
   scroll-padding-top: 70px;
 }
 
+/* ── Mobile Native App Dock Navigation ── */
+.mobile-app-nav {
+  display: none;
+}
+
+@media (max-width: 980px) {
+  body {
+    padding-bottom: 74px !important; /* Space for fixed bottom app dock */
+    overscroll-behavior-y: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .mobile-app-nav {
+    display: flex !important;
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: 64px !important;
+    background: rgba(255, 248, 236, 0.94) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border-top: 1px solid rgba(139, 19, 14, 0.12) !important;
+    z-index: 9999 !important;
+    justify-content: space-around !important;
+    align-items: center !important;
+    padding-bottom: env(safe-area-inset-bottom, 0px) !important;
+    box-shadow: 0 -8px 24px rgba(76, 23, 4, 0.08) !important;
+  }
+
+  .app-nav-item {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 3px !important;
+    color: #765f4f !important;
+    text-decoration: none !important;
+    flex: 1 !important;
+    height: 100% !important;
+    transition: all 0.2s ease !important;
+  }
+
+  .app-nav-icon {
+    width: 20px !important;
+    height: 20px !important;
+    transition: transform 0.2s ease !important;
+  }
+
+  .app-nav-item span {
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    font-family: "Noto Serif Devanagari", "Hind", sans-serif !important;
+  }
+
+  .app-nav-item.active {
+    color: #8b130e !important;
+  }
+
+  .app-nav-item.active .app-nav-icon {
+    transform: translateY(-2px) scale(1.1) !important;
+    stroke-width: 2.5 !important;
+  }
+
+  .app-nav-item.donate-tab.active {
+    color: #f28a12 !important;
+  }
+
+  .app-nav-item:active {
+    transform: scale(0.92) !important;
+  }
+
+  /* App Card Touch Feedback */
+  .btn:active,
+  .copy-btn:active,
+  .tier:active,
+  .brochure-grid a:active {
+    transform: scale(0.96) !important;
+    transition: transform 0.1s ease !important;
+  }
+}
+
 @media (max-width: 980px) {
   body {
     overflow-x: hidden;
@@ -2867,9 +2975,9 @@ html {
   ═══════════════════════════════════════════════ */
 
   .devotion-marquee {
-    height: 36px !important;
-    min-height: 36px !important;
-    max-height: 36px !important;
+    height: 40px !important;
+    min-height: 40px !important;
+    max-height: 40px !important;
     overflow: hidden !important;
     background: #8b130e !important;
     border-block: none !important;
@@ -2877,24 +2985,34 @@ html {
     align-items: center !important;
   }
 
-  .devotion-marquee div {
+  .marquee-track {
     display: flex !important;
     width: max-content !important;
-    gap: 32px !important;
-    padding: 0 !important;
-    font-size: 12px !important;
-    font-weight: 600 !important;
-    letter-spacing: 2px !important;
-    color: rgba(255, 255, 255, 0.7) !important;
-    animation: marquee 20s linear infinite !important;
-    white-space: nowrap !important;
-    font-family: "Hind", sans-serif !important;
+    animation: marquee 25s linear infinite !important;
   }
 
-  .devotion-marquee span::after {
+  .marquee-content {
+    display: flex !important;
+    align-items: center !important;
+    gap: 24px !important;
+    padding: 0 12px 0 0 !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    letter-spacing: 1px !important;
+    color: #fff2cc !important;
+    white-space: nowrap !important;
+    font-family: "Noto Serif Devanagari", "Hind", sans-serif !important;
+  }
+
+  .marquee-content span {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 24px !important;
+  }
+
+  .marquee-content span::after {
     content: "✦" !important;
-    margin-left: 32px !important;
-    color: rgba(245, 166, 35, 0.7) !important;
+    color: var(--gold) !important;
   }
 
   /* Image collage mobile adjustments */
@@ -3191,123 +3309,62 @@ html {
     display: none !important;
   }
 
-  /* शिरोमणि संरक्षक — dark premium card */
+  /* Mobile Tier Cards — Clean & High Contrast */
+  .tier {
+    width: 100% !important;
+    border-radius: 18px !important;
+    padding: 20px 24px !important;
+    text-align: left !important;
+    height: auto !important;
+    position: relative !important;
+    background: #ffffff !important;
+    border: 1.5px solid rgba(139, 19, 14, 0.18) !important;
+  }
+
+  .tier h3 {
+    color: #4b0806 !important;
+    font-size: 1.15rem !important;
+  }
+
+  .tier strong {
+    background: #fff3d7 !important;
+    color: #8b130e !important;
+    font-size: 1.1rem !important;
+    font-weight: 700 !important;
+    padding: 6px 14px !important;
+    border-radius: 999px !important;
+    display: inline-flex !important;
+    margin-top: 8px !important;
+  }
+
   .tier.featured {
-    background: #1A1A2E !important;
-    border: 2px solid #F5A623 !important;
-    color: #fff !important;
+    background: linear-gradient(135deg, #4b0806, #7a100b) !important;
+    border: 2px solid #f28a12 !important;
+    color: #ffffff !important;
   }
 
   .tier.featured h3 {
-    color: #fff !important;
+    color: #ffffff !important;
   }
 
   .tier.featured .tier-icon {
-    background: rgba(245, 166, 35, 0.2) !important;
-    border: 1px solid #F5A623 !important;
+    background: rgba(242, 138, 18, 0.2) !important;
+    border: 1px solid #f28a12 !important;
   }
 
   .tier.featured .jain-svg-icon {
-    stroke: #F5A623 !important;
+    stroke: #f28a12 !important;
   }
 
   .tier.featured strong {
-    background: transparent !important;
-    color: #F5A623 !important;
-    font-size: 32px !important;
-    font-weight: 700 !important;
-    padding: 0 !important;
-    border-radius: 0 !important;
-    display: block !important;
+    background: linear-gradient(135deg, #f28a12, #ffd166) !important;
+    color: #3d0504 !important;
+    font-size: 1.1rem !important;
+    font-weight: 800 !important;
+    padding: 6px 14px !important;
+    border-radius: 999px !important;
+    display: inline-flex !important;
     margin-top: 8px !important;
-  }
-
-  /* परम संरक्षक */
-  .tier:nth-child(2) {
-    background: #8b130e !important;
-    border: none !important;
-    color: #fff !important;
-  }
-
-  .tier:nth-child(2) h3 {
-    color: #fff !important;
-  }
-
-  .tier:nth-child(2) .tier-icon {
-    background: rgba(255, 255, 255, 0.15) !important;
-  }
-
-  .tier:nth-child(2) .jain-svg-icon {
-    stroke: #fff !important;
-  }
-
-  .tier:nth-child(2) strong {
-    background: transparent !important;
-    color: #fff !important;
-    font-size: 28px !important;
-    font-weight: 700 !important;
-    padding: 0 !important;
-    border-radius: 0 !important;
-    display: block !important;
-    margin-top: 8px !important;
-  }
-
-  /* संरक्षक */
-  .tier:nth-child(3) {
-    background: #F8F4FF !important;
-    border: 1.5px solid #8b130e !important;
-    color: #1A1A2E !important;
-  }
-
-  .tier:nth-child(3) h3 {
-    color: #1A1A2E !important;
-  }
-
-  .tier:nth-child(3) strong {
-    background: transparent !important;
-    color: #8b130e !important;
-    font-size: 28px !important;
-    font-weight: 700 !important;
-    padding: 0 !important;
-    border-radius: 0 !important;
-    display: block !important;
-    margin-top: 8px !important;
-  }
-
-  /* सदस्य */
-  .tier:nth-child(4) {
-    background: #fff !important;
-    border: 1px solid rgba(139, 19, 14, 0.2) !important;
-    color: #1A1A2E !important;
-  }
-
-  .tier:nth-child(4) h3 {
-    color: #1A1A2E !important;
-  }
-
-  .tier:nth-child(4) strong {
-    background: transparent !important;
-    color: #8b130e !important;
-    font-size: 28px !important;
-    font-weight: 700 !important;
-    padding: 0 !important;
-    border-radius: 0 !important;
-    display: block !important;
-    margin-top: 8px !important;
-  }
-
-  .tier:nth-child(3) .tier-icon {
-    background: rgba(139, 19, 14, 0.1) !important;
-  }
-  .tier:nth-child(3) .jain-svg-icon {
-    stroke: #8b130e !important;
-  }
-
-  .tier:nth-child(4) .tier-icon {
-    background: rgba(139, 19, 14, 0.05) !important;
-  }
-  .tier:nth-child(4) .jain-svg-icon {
-    stroke: #8b130e !important;
   }
 
   .tier-icon {

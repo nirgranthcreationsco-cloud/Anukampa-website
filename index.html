@@ -15,7 +15,10 @@
       rel="stylesheet"
     />
     <link rel="preload" as="image" href="assets/anukampa-logo.png?v=2" />
-    <link rel="stylesheet" href="styles.css?v=14" />
+    <link rel="stylesheet" href="styles.css?v=18" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="theme-color" content="#8b130e" />
     <!-- Open Graph / WhatsApp / Social Sharing Meta Tags -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content="अनुकम्पा | सेवा • सद्भावना • सहयोग" />
@@ -126,17 +129,41 @@
       </section>
 
       <div class="devotion-marquee" aria-hidden="true">
-        <div>
-          <span>सेवा</span>
-          <span>सद्भावना</span>
-          <span>सहयोग</span>
-          <span>करुणा</span>
-          <span>समर्पण</span>
-          <span>सेवा</span>
-          <span>सद्भावना</span>
-          <span>सहयोग</span>
-          <span>करुणा</span>
-          <span>समर्पण</span>
+        <div class="marquee-track">
+          <div class="marquee-content">
+            <span>सेवा</span>
+            <span>सद्भावना</span>
+            <span>सहयोग</span>
+            <span>करुणा</span>
+            <span>समर्पण</span>
+            <span>सेवा</span>
+            <span>सद्भावना</span>
+            <span>सहयोग</span>
+            <span>करुणा</span>
+            <span>समर्पण</span>
+            <span>सेवा</span>
+            <span>सद्भावना</span>
+            <span>सहयोग</span>
+            <span>करुणा</span>
+            <span>समर्पण</span>
+          </div>
+          <div class="marquee-content" aria-hidden="true">
+            <span>सेवा</span>
+            <span>सद्भावना</span>
+            <span>सहयोग</span>
+            <span>करुणा</span>
+            <span>समर्पण</span>
+            <span>सेवा</span>
+            <span>सद्भावना</span>
+            <span>सहयोग</span>
+            <span>करुणा</span>
+            <span>समर्पण</span>
+            <span>सेवा</span>
+            <span>सद्भावना</span>
+            <span>सहयोग</span>
+            <span>करुणा</span>
+            <span>समर्पण</span>
+          </div>
         </div>
       </div>
 
@@ -272,6 +299,43 @@
           </div>
           <div class="tiers">
             <article class="tier featured">
+              <span class="tier-icon">
+                <svg class="jain-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+              </span>
+              <h3>अनुकंपा गौरव</h3>
+              <strong>₹ 1 करोड़ /-</strong>
+            </article>
+            <article class="tier featured">
+              <span class="tier-icon">
+                <svg class="jain-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                </svg>
+              </span>
+              <h3>अनुकंपा भूषण</h3>
+              <strong>₹ 51 लाख /-</strong>
+            </article>
+            <article class="tier">
+              <span class="tier-icon">
+                <svg class="jain-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/>
+                  <path d="M12 6c-3 3-3 7 0 10 3-3 3-7 0-10z"/>
+                </svg>
+              </span>
+              <h3>महाश्रेय संरक्षक</h3>
+              <strong>₹ 21 लाख /-</strong>
+            </article>
+            <article class="tier">
+              <span class="tier-icon">
+                <svg class="jain-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+              </span>
+              <h3>श्रेय संरक्षक</h3>
+              <strong>₹ 11 लाख /-</strong>
+            </article>
+            <article class="tier">
               <span class="tier-icon">
                 <svg class="jain-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
@@ -462,6 +526,38 @@
         </div>
       </div>
     </footer>
+
+    <!-- Mobile Native App Bottom Navigation Bar -->
+    <nav class="mobile-app-nav" aria-label="मोबाइल नेविगेशन">
+      <a href="#top" class="app-nav-item active">
+        <svg class="app-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+          <polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+        <span>गृह</span>
+      </a>
+      <a href="#about" class="app-nav-item">
+        <svg class="app-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="12" y1="16" x2="12" y2="12"/>
+          <line x1="12" y1="8" x2="12.01" y2="8"/>
+        </svg>
+        <span>परिचय</span>
+      </a>
+      <a href="#membership" class="app-nav-item">
+        <svg class="app-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+        </svg>
+        <span>श्रेणियाँ</span>
+      </a>
+      <a href="#donate" class="app-nav-item donate-tab">
+        <svg class="app-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="5" width="20" height="14" rx="2"/>
+          <line x1="2" y1="10" x2="22" y2="10"/>
+        </svg>
+        <span>बैंक विवरण</span>
+      </a>
+    </nav>
 
     <script src="script.js"></script>
   </body>
