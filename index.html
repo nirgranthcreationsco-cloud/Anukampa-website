@@ -15,7 +15,7 @@
       rel="stylesheet"
     />
     <link rel="preload" as="image" href="assets/anukampa-logo.png?v=2" />
-    <link rel="stylesheet" href="styles.css?v=18" />
+    <link rel="stylesheet" href="styles.css?v=19" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="theme-color" content="#8b130e" />
@@ -376,6 +376,191 @@
           </div>
           <div class="monthly-note">
             मासिक सहयोग राशि सभी श्रेणियों के लिए: <strong>₹ 1,000/- प्रतिमाह</strong>
+          </div>
+
+          <!-- Official Membership Application Form Container -->
+          <div class="membership-form-wrapper" id="membershipFormSection">
+            <div class="membership-form-header">
+              <span class="badge-title">सदस्य का विवरण</span>
+              <h2>आधिकारिक सदस्यता आवेदन पत्र</h2>
+              <p>कृपया अनुकम्पा अभियान की सदस्यता हेतु अपना विवरण भरें।</p>
+            </div>
+
+            <form class="membership-form" id="membershipForm">
+              <div class="form-row full-width">
+                <label>
+                  सदस्यता श्रेणी चुनें (Select Membership Category) *
+                  <select name="tier" id="membershipTierSelect" required>
+                    <option value="">-- श्रेणी का चयन करें --</option>
+                    <option value="अनुकंपा गौरव (₹ 1 करोड़ /-)">1. अनुकंपा गौरव — ₹ 1 करोड़ /-</option>
+                    <option value="अनुकंपा भूषण (₹ 51 लाख /-)">2. अनुकंपा भूषण — ₹ 51 लाख /-</option>
+                    <option value="महाश्रेय संरक्षक (₹ 21 लाख /-)">3. महाश्रेय संरक्षक — ₹ 21 लाख /-</option>
+                    <option value="श्रेय संरक्षक (₹ 11 लाख /-)">4. श्रेय संरक्षक — ₹ 11 लाख /-</option>
+                    <option value="शिरोमणि संरक्षक (₹ 5,51,000/-)">5. शिरोमणि संरक्षक — ₹ 5,51,000/-</option>
+                    <option value="परम संरक्षक (₹ 2,51,000/-)">6. परम संरक्षक — ₹ 2,51,000/-</option>
+                    <option value="संरक्षक (₹ 1,11,000/-)">7. संरक्षक — ₹ 1,11,000/-</option>
+                    <option value="सदस्य (₹ 11,000/-)">8. सदस्य — ₹ 11,000/-</option>
+                  </select>
+                </label>
+              </div>
+
+              <div class="form-grid-3">
+                <label>
+                  नाम (Full Name) *
+                  <input name="name" type="text" placeholder="पूरा नाम" required />
+                </label>
+                <label>
+                  पिता / पति का नाम *
+                  <input name="father_husband_name" type="text" placeholder="पिता या पति का नाम" required />
+                </label>
+                <label>
+                  ब्लड ग्रुप (Blood Group)
+                  <select name="blood_group">
+                    <option value="ज्ञात नहीं">-- चुनें --</option>
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+                  </select>
+                </label>
+              </div>
+
+              <div class="form-row full-width">
+                <label>
+                  पता (Address) *
+                  <input name="address" type="text" placeholder="मकान नंबर, गली, क्षेत्र" required />
+                </label>
+              </div>
+
+              <div class="form-grid-3">
+                <label>
+                  शहर (City) *
+                  <input name="city" type="text" placeholder="शहर" required />
+                </label>
+                <label>
+                  राज्य (State) *
+                  <input name="state" type="text" placeholder="राज्य" required />
+                </label>
+                <label>
+                  पिनकोड (Pincode) *
+                  <input name="pincode" type="text" maxlength="6" pattern="[0-9]{6}" inputmode="numeric" placeholder="6 अंकों का पिनकोड" required />
+                </label>
+              </div>
+
+              <div class="form-grid-2">
+                <label>
+                  मोबाइल नंबर *
+                  <input name="phone" type="tel" minlength="10" maxlength="10" pattern="[0-9]{10}" inputmode="numeric" placeholder="10 अंकों का मोबाइल नंबर" required />
+                </label>
+                <label>
+                  ईमेल (Email)
+                  <input name="email" type="email" placeholder="email@example.com" />
+                </label>
+              </div>
+
+              <div class="form-grid-2">
+                <label>
+                  पैन नंबर (PAN Number)
+                  <input name="pan" type="text" maxlength="10" placeholder="10 अंकों का PAN नंबर" style="text-transform:uppercase;" />
+                </label>
+                <label>
+                  आधार नंबर (Aadhaar Number)
+                  <input name="aadhaar" type="text" maxlength="12" pattern="[0-9]{12}" inputmode="numeric" placeholder="12 अंकों का आधार नंबर" />
+                </label>
+              </div>
+
+              <div class="form-grid-2">
+                <label>
+                  व्यवसाय (Occupation)
+                  <input name="occupation" type="text" placeholder="व्यवसाय / पेशा" />
+                </label>
+                <label>
+                  जन्मतिथि (Date of Birth)
+                  <input name="dob" type="date" />
+                </label>
+              </div>
+
+              <div class="terms-agreement-box">
+                <label class="checkbox-label">
+                  <input type="checkbox" name="terms" id="membershipTerms" required />
+                  <span>मैं संस्था के नियम एवं निर्देशों से सहमत हूँ तथा संस्था के उद्देश्यों में सहयोग प्रदान करने का संकल्प लेता / लेती हूँ। *</span>
+                </label>
+              </div>
+
+              <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                <button class="btn primary submit-membership-btn" type="submit" style="flex: 2;">
+                  आवेदन जमा करें एवं भुगतान विवरण देखें
+                </button>
+                <button class="btn secondary" type="button" id="autoFillDemoBtn" style="flex: 1; padding: 14px; white-space: nowrap;">
+                  ⚡ टेस्ट डेटा भरें
+                </button>
+              </div>
+            </form>
+
+            <!-- Step 2: Payment & Bank Details Confirmation View (Hidden initially) -->
+            <div class="membership-payment-step" id="membershipPaymentStep" style="display: none;">
+              <div class="success-header">
+                <span class="success-check-badge">✓</span>
+                <h3>सदस्यता आवेदन सफलतापूर्वक दर्ज कर लिया गया है!</h3>
+                <p>आपकी सदस्यता का विवरण संस्था के रिकॉर्ड में दर्ज हो गया है। कृपया नीचे दिए गए बैंक खाते में अपनी सहयोग राशि स्थानांतरित करें।</p>
+              </div>
+
+              <div class="selected-tier-banner">
+                <small>चयनित सदस्यता श्रेणी</small>
+                <strong id="displaySelectedTier">अनुकंपा गौरव — ₹ 1 करोड़ /-</strong>
+              </div>
+
+              <div class="account-card-wrapper" style="margin-top: 24px;">
+                <div class="account-card">
+                  <div class="account-row">
+                    <div class="account-info">
+                      <small>Account Name (संस्था का नाम)</small>
+                      <strong>Samarpan Sahayog Foundation</strong>
+                    </div>
+                    <button class="copy-btn" data-copy="Samarpan Sahayog Foundation">Copy</button>
+                  </div>
+
+                  <div class="account-row">
+                    <div class="account-info">
+                      <small>A/c Number (खाता संख्या)</small>
+                      <strong>50200112412254</strong>
+                    </div>
+                    <button class="copy-btn" data-copy="50200112412254">Copy</button>
+                  </div>
+
+                  <div class="account-row">
+                    <div class="account-info">
+                      <small>IFSC Code (आईएफएससी)</small>
+                      <strong>HDFC0007174</strong>
+                    </div>
+                    <button class="copy-btn" data-copy="HDFC0007174">Copy</button>
+                  </div>
+
+                  <div class="account-row">
+                    <div class="account-info">
+                      <small>Bank & Branch (बैंक एवं शाखा)</small>
+                      <strong>HDFC Bank, MG Road, Indore Branch</strong>
+                    </div>
+                    <button class="copy-btn" data-copy="HDFC Bank, MG Road, Indore Branch">Copy</button>
+                  </div>
+                </div>
+
+                <div class="tax-benefit-badge">
+                  <span>🛡️ संस्था को दी गई सहयोग राशि पर आयकर अधिनियम की धारा 80G के अंतर्गत कर छूट उपलब्ध है।</span>
+                </div>
+              </div>
+
+              <div class="post-submit-actions">
+                <a class="btn primary whatsapp-confirm-btn" id="membershipWhatsappBtn" href="#" target="_blank" rel="noreferrer">
+                  📱 WhatsApp पर भुगतान स्क्रीनशॉट भेजें
+                </a>
+                <button class="btn secondary" type="button" id="resetMembershipFormBtn">नया आवेदन पत्र भरें</button>
+              </div>
+            </div>
           </div>
         </div>
       </section>

@@ -556,6 +556,217 @@ p {
   font-weight: 800;
 }
 
+/* ═════════════════════════════════════════════════════════════════════
+   OFFICIAL MEMBERSHIP APPLICATION FORM STYLES
+   ═════════════════════════════════════════════════════════════════════ */
+.membership-form-wrapper {
+  margin-top: 48px;
+  background: #ffffff;
+  border: 1px solid rgba(139, 19, 14, 0.18);
+  border-radius: 28px;
+  padding: 42px;
+  box-shadow: 0 24px 60px rgba(76, 23, 4, 0.1);
+  position: relative;
+}
+
+.membership-form-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.membership-form-header .badge-title {
+  display: inline-block;
+  background: #8b130e;
+  color: #ffffff;
+  padding: 6px 20px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+}
+
+.membership-form-header h2 {
+  font-size: 1.8rem;
+  color: #4b0806;
+  margin-bottom: 6px;
+}
+
+.membership-form-header p {
+  color: #666;
+  font-size: 0.98rem;
+}
+
+.membership-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.94rem;
+  font-weight: 600;
+  color: #333333;
+}
+
+.membership-form input,
+.membership-form select {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1.5px solid rgba(139, 19, 14, 0.22);
+  border-radius: 12px;
+  background: #fffdfa;
+  font-size: 1rem;
+  font-family: inherit;
+  color: #1a1a2e;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.membership-form input:focus,
+.membership-form select:focus {
+  outline: none;
+  border-color: #8b130e;
+  box-shadow: 0 0 0 3px rgba(139, 19, 14, 0.12);
+}
+
+.form-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.form-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.form-row.full-width {
+  margin-bottom: 18px;
+}
+
+.terms-agreement-box {
+  margin: 24px 0;
+  padding: 16px 20px;
+  background: #fff8ee;
+  border-left: 4px solid #8b130e;
+  border-radius: 8px;
+}
+
+.checkbox-label {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: flex-start !important;
+  gap: 12px !important;
+  cursor: pointer;
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: 20px !important;
+  height: 20px !important;
+  margin-top: 2px;
+  accent-color: #8b130e;
+}
+
+.checkbox-label span {
+  font-size: 0.92rem;
+  color: #8b130e;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.submit-membership-btn {
+  width: 100%;
+  padding: 16px;
+  font-size: 1.15rem;
+  font-weight: 800;
+  border-radius: 14px;
+  cursor: pointer;
+}
+
+/* Step 2 Payment View */
+.membership-payment-step {
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+.success-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.success-check-badge {
+  display: inline-grid;
+  place-items: center;
+  width: 60px;
+  height: 60px;
+  background: #2e7d32;
+  color: #ffffff;
+  border-radius: 50%;
+  font-size: 2rem;
+  font-weight: 900;
+  margin-bottom: 14px;
+}
+
+.success-header h3 {
+  font-size: 1.6rem;
+  color: #2e7d32;
+  margin-bottom: 8px;
+}
+
+.selected-tier-banner {
+  text-align: center;
+  background: linear-gradient(135deg, #4b0806, #7a100b);
+  color: #ffffff;
+  padding: 18px;
+  border-radius: 16px;
+  border: 2px solid #f28a12;
+}
+
+.selected-tier-banner small {
+  display: block;
+  font-size: 0.88rem;
+  opacity: 0.9;
+}
+
+.selected-tier-banner strong {
+  display: block;
+  font-size: 1.4rem;
+  color: #ffd166;
+  margin-top: 4px;
+}
+
+.post-submit-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.whatsapp-confirm-btn {
+  text-align: center;
+  background: #25d366 !important;
+  border-color: #25d366 !important;
+  color: #ffffff !important;
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+
+.whatsapp-confirm-btn:hover {
+  background: #1eb957 !important;
+}
+
+@media (max-width: 768px) {
+  .membership-form-wrapper {
+    padding: 24px 18px !important;
+    border-radius: 20px !important;
+  }
+
+  .form-grid-3,
+  .form-grid-2 {
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+    margin-bottom: 14px !important;
+  }
+}
+
 .rules-card {
   padding: 38px;
 }

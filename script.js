@@ -127,7 +127,46 @@ copyButtons.forEach((button) => {
 
 // Configuration: Paste your Google Apps Script Web App URL here to save submissions to Google Sheets.
 // If left empty, it will default to sending the details directly via WhatsApp.
-const GOOGLE_SHEET_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbxa3uDckuFOJIuRucX44tz1dMCtJMjaZ74Y6Io1ewGVpoqX7ZD3Q5kDCKZyKf1-g40A/exec";
+const GOOGLE_SHEET_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbyImUwhD_1ody2WyKYZ4U_nipFlK9Pe-N3zAUIjQ67m-7WaEDkn_HoUlMZDhLVDSRjA8g/exec";
+
+// Reliable Google Sheets Webhook Submission via Hidden Target iFrame
+// Fixes browser fetch no-cors 302 redirect POST payload loss bugs across Chrome, Safari & mobile browsers
+function submitToGoogleSheets(url, data) {
+  return new Promise((resolve) => {
+    let iframe = document.querySelector("#hidden_gscript_iframe");
+    if (!iframe) {
+      iframe = document.createElement("iframe");
+      iframe.id = "hidden_gscript_iframe";
+      iframe.name = "hidden_gscript_iframe";
+      iframe.style.display = "none";
+      document.body.appendChild(iframe);
+    }
+
+    const form = document.createElement("form");
+    form.method = "POST";
+    form.action = url;
+    form.target = "hidden_gscript_iframe";
+    form.style.display = "none";
+
+    for (const key in data) {
+      if (data[key] !== undefined && data[key] !== null) {
+        const input = document.createElement("input");
+        input.type = "hidden";
+        input.name = key;
+        input.value = data[key];
+        form.appendChild(input);
+      }
+    }
+
+    document.body.appendChild(form);
+    form.submit();
+
+    setTimeout(() => {
+      form.remove();
+      resolve();
+    }, 1200);
+  });
+}
 
 const volunteerForm = document.querySelector("#volunteerForm");
 
@@ -149,13 +188,13 @@ volunteerForm?.addEventListener("submit", async (event) => {
     submitBtn.disabled = true;
 
     try {
-      const response = await fetch(GOOGLE_SHEET_WEBHOOK_URL, {
-        method: "POST",
-        mode: "no-cors", // Required for Google Apps Script redirects
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ name, phone, city, role, date: new Date().toLocaleString("en-IN") }),
+      await submitToGoogleSheets(GOOGLE_SHEET_WEBHOOK_URL, {
+        formType: "Volunteer Registration",
+        name: name || "",
+        phone: phone || "",
+        city: city || "",
+        role: role || "",
+        date: new Date().toLocaleString("en-IN"),
       });
 
       alert("सफलतापूर्वक दर्ज कर लिया गया है! हमारे प्रतिनिधि जल्द ही आपसे संपर्क करेंगे।");
@@ -215,5 +254,113 @@ if (volunteerPhoneInput) {
     }
   });
 }
+
+// ═════════════════════════════════════════════════════════════════════
+// Official Membership Application Form Handler
+// ═════════════════════════════════════════════════════════════════════
+const membershipForm = document.querySelector("#membershipForm");
+const membershipPaymentStep = document.querySelector("#membershipPaymentStep");
+const displaySelectedTier = document.querySelector("#displaySelectedTier");
+const membershipWhatsappBtn = document.querySelector("#membershipWhatsappBtn");
+const resetMembershipFormBtn = document.querySelector("#resetMembershipFormBtn");
+
+if (membershipForm) {
+  // Input validations for membership phone and pincode
+  const memPhone = membershipForm.querySelector("input[name='phone']");
+  const memPincode = membershipForm.querySelector("input[name='pincode']");
+  const memAadhaar = membershipForm.querySelector("input[name='aadhaar']");
+
+  [memPhone, memPincode, memAadhaar].forEach((input) => {
+    input?.addEventListener("keypress", (e) => {
+      if (e.key < "0" || e.key > "9") e.preventDefault();
+    });
+  });
+
+  membershipForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const submitBtn = membershipForm.querySelector("button[type='submit']");
+    const originalText = submitBtn.textContent;
+
+    const formData = new FormData(membershipForm);
+    const payload = {
+      formType: "Official Membership Application",
+      tier: formData.get("tier"),
+      name: formData.get("name"),
+      father_husband_name: formData.get("father_husband_name"),
+      blood_group: formData.get("blood_group"),
+      phone: formData.get("phone"),
+      email: formData.get("email"),
+      address: formData.get("address"),
+      city: formData.get("city"),
+      state: formData.get("state"),
+      pincode: formData.get("pincode"),
+      pan: formData.get("pan"),
+      aadhaar: formData.get("aadhaar"),
+      occupation: formData.get("occupation"),
+      dob: formData.get("dob"),
+      date: new Date().toLocaleString("en-IN"),
+    };
+
+    submitBtn.textContent = "विवरण दर्ज किया जा रहा है...";
+    submitBtn.disabled = true;
+
+    // Send payload to Google Sheets Webhook if configured
+    if (GOOGLE_SHEET_WEBHOOK_URL) {
+      try {
+        await submitToGoogleSheets(GOOGLE_SHEET_WEBHOOK_URL, payload);
+      } catch (err) {
+        console.error("Sheet submission failed:", err);
+      }
+    }
+
+    // Step 2 Transition — Show Payment & Bank Details Confirmation
+    if (displaySelectedTier) {
+      displaySelectedTier.textContent = payload.tier;
+    }
+
+    const whatsappMessage = `जय जिनेन्द्र, मैंने अनुकम्पा सदस्यता आवेदन पत्र भर दिया है।%0Aनाम: ${payload.name}%0Aश्रेणी: ${payload.tier}%0Aमोबाइल: ${payload.phone}%0Aशहर: ${payload.city}%0Aकृपया भुगतान सत्यापित करें।`;
+
+    if (membershipWhatsappBtn) {
+      membershipWhatsappBtn.href = `https://wa.me/917415648038?text=${whatsappMessage}`;
+    }
+
+    membershipForm.style.display = "none";
+    if (membershipPaymentStep) {
+      membershipPaymentStep.style.display = "block";
+      membershipPaymentStep.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    submitBtn.textContent = originalText;
+    submitBtn.disabled = false;
+  });
+}
+
+resetMembershipFormBtn?.addEventListener("click", () => {
+  membershipForm.reset();
+  membershipPaymentStep.style.display = "none";
+  membershipForm.style.display = "block";
+  membershipForm.scrollIntoView({ behavior: "smooth", block: "start" });
+});
+
+// Auto-fill Demo Data for Instant Testing
+const autoFillDemoBtn = document.querySelector("#autoFillDemoBtn");
+autoFillDemoBtn?.addEventListener("click", () => {
+  if (!membershipForm) return;
+  membershipForm.querySelector("#membershipTierSelect").value = "1. अनुकंपा गौरव — ₹ 1 करोड़ /-";
+  membershipForm.querySelector("input[name='name']").value = "अनिल कुमार जैन (Demo Test)";
+  membershipForm.querySelector("input[name='father_husband_name']").value = "सुरेश चंद्र जैन";
+  membershipForm.querySelector("select[name='blood_group']").value = "O+";
+  membershipForm.querySelector("input[name='address']").value = "123, एम.जी. रोड, साकेत नगर";
+  membershipForm.querySelector("input[name='city']").value = "इन्दौर";
+  membershipForm.querySelector("input[name='state']").value = "मध्य प्रदेश";
+  membershipForm.querySelector("input[name='pincode']").value = "452001";
+  membershipForm.querySelector("input[name='phone']").value = "9876543210";
+  membershipForm.querySelector("input[name='email']").value = "anil.jain@example.com";
+  membershipForm.querySelector("input[name='pan']").value = "ABCDE1234F";
+  membershipForm.querySelector("input[name='aadhaar']").value = "123456789012";
+  membershipForm.querySelector("input[name='occupation']").value = "व्यवसायी";
+  membershipForm.querySelector("input[name='dob']").value = "1985-05-15";
+  membershipForm.querySelector("#membershipTerms").checked = true;
+});
 
 
