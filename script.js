@@ -342,25 +342,4 @@ resetMembershipFormBtn?.addEventListener("click", () => {
   membershipForm.scrollIntoView({ behavior: "smooth", block: "start" });
 });
 
-// Auto-fill Demo Data for Instant Testing
-const autoFillDemoBtn = document.querySelector("#autoFillDemoBtn");
-autoFillDemoBtn?.addEventListener("click", () => {
-  if (!membershipForm) return;
-  membershipForm.querySelector("#membershipTierSelect").value = "1. अनुकंपा गौरव — ₹ 1 करोड़ /-";
-  membershipForm.querySelector("input[name='name']").value = "अनिल कुमार जैन (Demo Test)";
-  membershipForm.querySelector("input[name='father_husband_name']").value = "सुरेश चंद्र जैन";
-  membershipForm.querySelector("select[name='blood_group']").value = "O+";
-  membershipForm.querySelector("input[name='address']").value = "123, एम.जी. रोड, साकेत नगर";
-  membershipForm.querySelector("input[name='city']").value = "इन्दौर";
-  membershipForm.querySelector("input[name='state']").value = "मध्य प्रदेश";
-  membershipForm.querySelector("input[name='pincode']").value = "452001";
-  membershipForm.querySelector("input[name='phone']").value = "9876543210";
-  membershipForm.querySelector("input[name='email']").value = "anil.jain@example.com";
-  membershipForm.querySelector("input[name='pan']").value = "ABCDE1234F";
-  membershipForm.querySelector("input[name='aadhaar']").value = "123456789012";
-  membershipForm.querySelector("input[name='occupation']").value = "व्यवसायी";
-  membershipForm.querySelector("input[name='dob']").value = "1985-05-15";
-  membershipForm.querySelector("#membershipTerms").checked = true;
-});
-
 
