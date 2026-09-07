@@ -125,9 +125,11 @@ copyButtons.forEach((button) => {
   });
 });
 
-// Configuration: Paste your Google Apps Script Web App URL here to save submissions to Google Sheets.
-// If left empty, it will default to sending the details directly via WhatsApp.
-const GOOGLE_SHEET_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbyImUwhD_1ody2WyKYZ4U_nipFlK9Pe-N3zAUIjQ67m-7WaEDkn_HoUlMZDhLVDSRjA8g/exec";
+// Configuration: Separate Google Apps Script Web App URLs for each form type.
+// Volunteer Registration → its own sheet
+const VOLUNTEER_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbyImUwhD_1ody2WyKYZ4U_nipFlK9Pe-N3zAUIjQ67m-7WaEDkn_HoUlMZDhLVDSRjA8g/exec";
+// Official Membership Application → its own sheet
+const MEMBERSHIP_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbwpwAXHiSnZZv-kUfQjdpeDLfiMvRXUD3-e0TzvDbI1iSZMioZtdxb7H7WyVIMJc2c/exec";
 
 // Reliable Google Sheets Webhook Submission via Hidden Target iFrame
 // Fixes browser fetch no-cors 302 redirect POST payload loss bugs across Chrome, Safari & mobile browsers
@@ -180,15 +182,15 @@ volunteerForm?.addEventListener("submit", async (event) => {
 
   const whatsappMessage = `जय जिनेन्द्र, मैं अनुकम्पा प्रतिनिधि बनकर अभियान में सहयोग देना चाहता/चाहती हूँ।%0Aनाम: ${name}%0Aमोबाइल: ${phone}%0Aशहर: ${city}%0Aयोगदान: ${role}`;
 
-  // If webhook URL is set, attempt to save to Google Sheets first
-  if (GOOGLE_SHEET_WEBHOOK_URL) {
+  // If volunteer webhook URL is set, attempt to save to Google Sheets first
+  if (VOLUNTEER_WEBHOOK_URL) {
     const submitBtn = volunteerForm.querySelector("button[type='submit']");
     const originalText = submitBtn.textContent;
     submitBtn.textContent = "दर्ज किया जा रहा है...";
     submitBtn.disabled = true;
 
     try {
-      await submitToGoogleSheets(GOOGLE_SHEET_WEBHOOK_URL, {
+      await submitToGoogleSheets(VOLUNTEER_WEBHOOK_URL, {
         formType: "Volunteer Registration",
         name: name || "",
         phone: phone || "",
@@ -305,9 +307,9 @@ if (membershipForm) {
     submitBtn.disabled = true;
 
     // Send payload to Google Sheets Webhook if configured
-    if (GOOGLE_SHEET_WEBHOOK_URL) {
+    if (MEMBERSHIP_WEBHOOK_URL) {
       try {
-        await submitToGoogleSheets(GOOGLE_SHEET_WEBHOOK_URL, payload);
+        await submitToGoogleSheets(MEMBERSHIP_WEBHOOK_URL, payload);
       } catch (err) {
         console.error("Sheet submission failed:", err);
       }
