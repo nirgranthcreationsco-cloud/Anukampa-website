@@ -178,9 +178,10 @@ volunteerForm?.addEventListener("submit", async (event) => {
   const name = formData.get("name");
   const phone = formData.get("phone");
   const city = formData.get("city");
+  const age = formData.get("age");
   const role = formData.get("role");
 
-  const whatsappMessage = `जय जिनेन्द्र, मैं अनुकम्पा प्रतिनिधि बनकर अभियान में सहयोग देना चाहता/चाहती हूँ।%0Aनाम: ${name}%0Aमोबाइल: ${phone}%0Aशहर: ${city}%0Aयोगदान: ${role}`;
+  const whatsappMessage = `जय जिनेन्द्र, मैं अनुकम्पा प्रतिनिधि बनकर अभियान में सहयोग देना चाहता/चाहती हूँ।%0Aनाम: ${name}%0Aउम्र: ${age}%0Aमोबाइल: ${phone}%0Aशहर: ${city}%0Aयोगदान: ${role}`;
 
   // If volunteer webhook URL is set, attempt to save to Google Sheets first
   if (VOLUNTEER_WEBHOOK_URL) {
@@ -193,6 +194,7 @@ volunteerForm?.addEventListener("submit", async (event) => {
       await submitToGoogleSheets(VOLUNTEER_WEBHOOK_URL, {
         formType: "Volunteer Registration",
         name: name || "",
+        age: age || "",
         phone: phone || "",
         city: city || "",
         role: role || "",
