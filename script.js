@@ -127,7 +127,7 @@ copyButtons.forEach((button) => {
 
 // Configuration: Separate Google Apps Script Web App URLs for each form type.
 // Volunteer Registration → its own sheet
-const VOLUNTEER_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbxF4oFcI8urKrMRpmGvGVynuiOZ1VTBj4mwsdRuBG24rnmiN8Yn5jd7_ptZSY9Xxl4t/exec";
+const VOLUNTEER_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbzIbv_8yOc5ZHkXaKWLZULC6cwmxrj2HHcsWHfZnjfvFAxLOd78ebD2Y26UMrnmOxpU/exec";
 // Official Membership Application → its own sheet
 const MEMBERSHIP_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbzYt7Mb9457jlunzYE-6QdhbkTeLxF-5_-Z_aSYqwWUC_XnvONVSJkEkjn1aQTrzykY4Q/exec";
 
