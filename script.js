@@ -129,7 +129,7 @@ copyButtons.forEach((button) => {
 // Volunteer Registration → its own sheet
 const VOLUNTEER_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbw5mt0mgBJqfgOmsqFpG9cZgIcrhmVIAaM666Oytzxbr836XlCQMWE0OccwBwG3z1QQ/exec";
 // Official Membership Application → its own sheet
-const MEMBERSHIP_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbyImUwhD_1ody2WyKYZ4U_nipFlK9Pe-N3zAUIjQ67m-7WaEDkn_HoUlMZDhLVDSRjA8g/exec";
+const MEMBERSHIP_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbzYt7Mb9457jlunzYE-6QdhbkTeLxF-5_-Z_aSYqwWUC_XnvONVSJkEkjn1aQTrzykY4Q/exec";
 
 // Reliable Google Sheets Webhook Submission via Hidden Target iFrame
 // Fixes browser fetch no-cors 302 redirect POST payload loss bugs across Chrome, Safari & mobile browsers
